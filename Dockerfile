@@ -16,8 +16,8 @@ WORKDIR /go/src/github.com/openshift/oc
 # Copy source code
 COPY . .
 
-# Build oc binary
-RUN make build --warn-undefined-variables
+# Build oc binary with explicit output directory
+RUN GO_BUILD_BINDIR=_output/bin GO_BUILD_PACKAGES=./cmd/oc make build --warn-undefined-variables
 
 # Final stage - minimal image
 FROM alpine:latest
